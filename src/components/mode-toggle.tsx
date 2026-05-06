@@ -10,7 +10,13 @@ export function ModeToggle() {
       document.startViewTransition &&
       !window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
-    const newTheme = theme === 'dark' ? 'light' : 'dark'
+    const resolvedTheme =
+      theme === 'system'
+        ? window.matchMedia('(prefers-color-scheme: dark)').matches
+          ? 'dark'
+          : 'light'
+        : theme
+    const newTheme = resolvedTheme === 'dark' ? 'light' : 'dark'
 
     if (!isAppearanceTransition) {
       setTheme(newTheme)
