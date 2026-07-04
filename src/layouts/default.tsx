@@ -11,7 +11,7 @@ function Default({ children }: { children: React.ReactNode }) {
         <div className="flex items-center gap-2 text-xl">
           <Button variant="secondary" size="icon" className="size-8" asChild>
             <a
-              href="https://github.com/tlyboys/tauri-shadcn-react-starter"
+              href="https://github.com/tlyboy/tauri-shadcn-react-starter"
               target="_blank"
               rel="noopener noreferrer"
             >
