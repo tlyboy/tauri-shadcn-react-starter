@@ -3,19 +3,13 @@ import { flushSync } from 'react-dom'
 import { Button } from './ui/button'
 
 export function ModeToggle() {
-  const { theme, setTheme } = useTheme()
+  const { resolvedTheme, setTheme } = useTheme()
 
   function toggleDark(event: React.MouseEvent<HTMLButtonElement>) {
     const isAppearanceTransition =
       typeof document.startViewTransition === 'function' &&
       !window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
-    const resolvedTheme =
-      theme === 'system'
-        ? window.matchMedia('(prefers-color-scheme: dark)').matches
-          ? 'dark'
-          : 'light'
-        : theme
     const newTheme = resolvedTheme === 'dark' ? 'light' : 'dark'
 
     if (!isAppearanceTransition) {
@@ -77,12 +71,12 @@ export function ModeToggle() {
                 : '::view-transition-new(root)',
           },
         )
-        // An animation with fill: 'forwards' doesn't disappear when it ends; it stays attached to documentElement.
-        // One accumulates on each switch, and the same-named pseudo-element in the next transition keeps having its clip-path set by the previous leftover animation.
+        // An animation with fill: 'forwards' does not disappear on its own when it ends; it stays attached to documentElement.
+        // Each toggle adds another one, and a leftover pseudo-element with the same name keeps writing clip-path during the next transition.
         void transition.finished.finally(() => animation.cancel())
       })
-      // If the transition is interrupted (rapid clicks, route change), ready rejects with InvalidStateError.
-      // The theme has already switched, so catch must be attached after then to catch the derived chain.
+      // If a transition is interrupted (rapid clicks, route changes), ready rejects with InvalidStateError.
+      // The theme has already switched at this point, so catch must be attached after then to handle the resulting chain.
       .catch(() => {})
   }
 
