@@ -20,9 +20,7 @@ function Default({ children }: { children: React.ReactNode }) {
             size="icon"
             className="size-8"
             onClick={() => {
-              void openUrl(
-                'https://github.com/tlyboy/tauri-shadcn-react-starter',
-              )
+              void openUrl('https://github.com/tlyboy/tauri-shadcn-react-starter')
             }}
           >
             <svg viewBox="0 0 438.549 438.549" aria-hidden="true">
