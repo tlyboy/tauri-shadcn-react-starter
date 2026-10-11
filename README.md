@@ -5,7 +5,7 @@
 ## Install
 
 ```bash
-npx degit tlyboy/tauri-shadcn-react-starter my-project
+npx giget gh:tlyboy/tauri-shadcn-react-starter my-project
 ```
 
 ## Usage
